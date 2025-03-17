@@ -1,0 +1,17 @@
+.activatable::disabled {
+  opacity: var(--opacity-small);
+  pointer-events: none;
+}
+
+.link {
+  color: var(--primary);
+  text-decoration: none;
+}
+.link:hover {
+  text-decoration: underline;
+}
+
+.input::placeholder {
+  opacity: var(--opacity-small);
+  color: inherit;
+}

@@ -2,10 +2,4 @@
 
 ## to do
 
-- [ ] deploy
-
-## roadmap
-
-### future
-
-- [ ] local fonts
+- [x] deploy
