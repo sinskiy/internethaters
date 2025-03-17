@@ -1,4 +1,10 @@
-.activatable::disabled {
+.activatable:hover {
+  opacity: var(--opacity-medium);
+}
+.activatable:active {
+  transform: scale(var(--scale));
+}
+.activatable:disabled {
   opacity: var(--opacity-small);
   pointer-events: none;
 }
@@ -14,4 +20,28 @@
 .input::placeholder {
   opacity: var(--opacity-small);
   color: inherit;
+}
+
+.button {
+  composes: activatable;
+  font-weight: 500;
+  padding: 8px 32px;
+  background-color: rgb(var(--primary));
+  color: rgb(var(--on-primary));
+  border-radius: var(--rounded-full);
+  transition: opacity var(--transition-length);
+}
+.loading {
+  position: relative;
+}
+.with-icon {
+  display: flex;
+  gap: 4px;
+}
+.small {
+  padding: 4px 16px;
+}
+
+.pfp {
+  border-radius: var(--rounded-full);
 }

@@ -1,0 +1,10 @@
+.user {
+  display: flex;
+  justify-content: space-between;
+}
+
+.profile {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}

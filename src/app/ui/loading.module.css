@@ -1,0 +1,27 @@
+.wrapper {
+  background-color: inherit;
+  border-radius: inherit;
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+}
+
+.loading {
+  width: 24px;
+  height: 24px;
+  border-radius: var(--rounded-full);
+  border: 3px solid currentColor;
+  border-bottom-color: transparent;
+  animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

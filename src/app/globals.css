@@ -1,5 +1,6 @@
 :root {
   --primary: 255 177 192;
+  --on-primary: 0 0 0;
   --background: 79 52 57;
   --on-background: 255 255 255;
   --rounded-small: 4px;

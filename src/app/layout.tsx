@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Ubuntu } from "next/font/google";
 import "./reset.css";
 import "./globals.css";
+import { Suspense } from "react";
+import { UserAuth } from "./components/user";
 
 const ubuntu = Ubuntu({
   weight: "400",
@@ -21,7 +23,20 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={ubuntu.className}>{children}</body>
+      <body className={ubuntu.className}>
+        <Header />
+        {children}
+      </body>
     </html>
+  );
+}
+
+function Header() {
+  return (
+    <header>
+      <Suspense fallback="loading...">
+        <UserAuth />
+      </Suspense>
+    </header>
   );
 }
