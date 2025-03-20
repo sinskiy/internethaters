@@ -4,8 +4,7 @@ import classes from "./page.module.css";
 import { auth } from "@/server/auth";
 import { headers } from "next/headers";
 import { redirect } from "next/navigation";
-import { deleteAccountById } from "@/server/db/queries";
-import FormButton from "@/app/components/form-button";
+import DeleteAccount from "@/app/components/delete-account";
 
 export default async function Settings({
   params,
@@ -34,15 +33,7 @@ export default async function Settings({
           edit information
         </Link>
       </nav>
-      <form
-        action={async () => {
-          "use server";
-          await deleteAccountById(session.user.id);
-          redirect("/");
-        }}
-      >
-        <FormButton className={components.error}>delete account</FormButton>
-      </form>
+      <DeleteAccount id={session.user.id} />
     </main>
   );
 }
