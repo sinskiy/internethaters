@@ -33,7 +33,7 @@ function User({ username, pfpUrl }: UserProfileProps) {
         />
         <p>{username}</p>
       </div>
-      <div className={classes.right}>
+      <div className={components["small-nav"]}>
         <Link href={`/users/${username}/settings`} aria-label="settings">
           <Settings />
         </Link>

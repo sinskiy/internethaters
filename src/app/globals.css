@@ -1,9 +1,14 @@
 :root {
+  /* rgb(var(--example)) */
   --primary: 177 209 138;
   --on-primary: 31 55 1;
   --background: 18 20 14;
-  --on-background: 226 227 216;
+  --foreground: 226 227 216;
+  --foreground-variant: 197 200 186;
   --surface: 30 32 26;
+  --surface-high: 40 43 36;
+  --error: 255 180 171;
+  --on-error: 105 0 5;
   --rounded-small: 4px;
   --rounded-medium: 24px;
   --rounded-full: 9999px;
@@ -23,7 +28,7 @@ body {
   font-family: Ubuntu, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
     "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   background-color: rgb(var(--background));
-  color: rgb(var(--on-background));
+  color: rgb(var(--foreground));
 
   margin: 32px auto;
   padding: 0 16px;

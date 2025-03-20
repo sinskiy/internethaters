@@ -5,7 +5,9 @@
 - [x] deploy
 - [x] auth
 - [x] profile
-- [ ] delete account
+- [x] delete account
+  - [ ] with confirmation dialog
+  - [ ] with message to confirm
 - [ ] edit pfp and username
 - [ ] 404
 - [ ] error

@@ -1,3 +1,4 @@
+"use client";
 import { cn } from "@/lib/utils";
 import components from "@/app/components.module.css";
 import { ButtonHTMLAttributes } from "react";

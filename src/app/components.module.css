@@ -1,3 +1,11 @@
+.form-title {
+  font-size: 2rem;
+}
+.text {
+  max-width: 60ch;
+  color: rgb(var(--foreground-variant));
+}
+
 .activatable:hover {
   opacity: var(--opacity-medium);
 }
@@ -11,10 +19,10 @@
 
 .link {
   color: var(--primary);
-  text-decoration: none;
+  text-decoration: underline;
 }
 .link:hover {
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 .input::placeholder {
@@ -40,7 +48,16 @@
 .small {
   padding: 4px 16px;
 }
+.error {
+  background-color: rgb(var(--error));
+  color: rgb(var(--on-error));
+}
 
 .pfp {
   border-radius: var(--rounded-full);
+}
+
+.small-nav {
+  display: flex;
+  gap: 8px;
 }
