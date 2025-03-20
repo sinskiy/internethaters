@@ -1,0 +1,13 @@
+.orphan-header {
+  margin-bottom: 24px;
+}
+
+.body {
+  margin: 8px 0;
+}
+
+.nav {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}

@@ -6,6 +6,17 @@
   color: rgb(var(--foreground-variant));
 }
 
+.dialog {
+  padding: 48px;
+  padding-bottom: 32px;
+  background-color: rgb(var(--surface));
+  border-radius: var(--rounded-medium);
+  color: inherit;
+}
+.dialog::backdrop {
+  background-color: rgb(0 0 0 / 0.7);
+}
+
 .activatable:hover {
   opacity: var(--opacity-medium);
 }

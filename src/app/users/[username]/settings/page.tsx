@@ -1,9 +1,6 @@
 import Link from "next/link";
 import components from "@/app/components.module.css";
 import classes from "./page.module.css";
-import { auth } from "@/server/auth";
-import { headers } from "next/headers";
-import { redirect } from "next/navigation";
 import DeleteAccount from "@/app/components/delete-account";
 
 export default async function Settings({
@@ -11,12 +8,7 @@ export default async function Settings({
 }: {
   params: Promise<{ username: string }>;
 }) {
-  const sessionPromise = auth.api.getSession({ headers: await headers() });
-  const [session, awaitedParams] = await Promise.all([sessionPromise, params]);
-  if (!session || session.user.name !== awaitedParams.username) {
-    redirect("/");
-  }
-
+  const awaitedParams = await params;
   return (
     <main className={classes.main}>
       <nav className={components["small-nav"]}>
@@ -33,7 +25,7 @@ export default async function Settings({
           edit information
         </Link>
       </nav>
-      <DeleteAccount id={session.user.id} />
+      <DeleteAccount username={awaitedParams.username} />
     </main>
   );
 }
