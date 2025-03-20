@@ -3,8 +3,10 @@ import { headers } from "next/headers";
 import components from "@/app/components.module.css";
 import { OAuthButton, SignOutButton } from "./auth";
 import classes from "./user.module.css";
+import Link from "next/link";
+import Settings from "../icons/settings";
 
-export async function UserAuth() {
+export async function UserOrAuth() {
   const session = await auth.api.getSession({ headers: await headers() });
   if (!session) {
     return <OAuthButton />;
@@ -31,7 +33,12 @@ function User({ username, pfpUrl }: UserProfileProps) {
         />
         <p>{username}</p>
       </div>
-      <SignOutButton />
+      <div className={classes.right}>
+        <Link href={`/users/${username}/settings`} aria-label="settings">
+          <Settings />
+        </Link>
+        <SignOutButton />
+      </div>
     </div>
   );
 }

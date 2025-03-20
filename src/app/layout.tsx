@@ -3,7 +3,7 @@ import { Ubuntu } from "next/font/google";
 import "./reset.css";
 import "./globals.css";
 import { Suspense } from "react";
-import { UserAuth } from "./components/user";
+import { UserOrAuth } from "./components/user";
 
 const ubuntu = Ubuntu({
   weight: "400",
@@ -35,7 +35,7 @@ function Header() {
   return (
     <header>
       <Suspense fallback="loading...">
-        <UserAuth />
+        <UserOrAuth />
       </Suspense>
     </header>
   );

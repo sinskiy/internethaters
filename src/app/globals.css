@@ -1,8 +1,9 @@
 :root {
-  --primary: 255 177 192;
-  --on-primary: 0 0 0;
-  --background: 79 52 57;
-  --on-background: 255 255 255;
+  --primary: 177 209 138;
+  --on-primary: 31 55 1;
+  --background: 18 20 14;
+  --on-background: 226 227 216;
+  --surface: 30 32 26;
   --rounded-small: 4px;
   --rounded-medium: 24px;
   --rounded-full: 9999px;

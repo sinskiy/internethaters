@@ -54,3 +54,7 @@ textarea {
 textarea {
   resize: vertical;
 }
+
+a {
+  color: currentColor;
+}

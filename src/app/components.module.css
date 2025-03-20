@@ -26,8 +26,7 @@
   composes: activatable;
   font-weight: 500;
   padding: 8px 32px;
-  background-color: rgb(var(--primary));
-  color: rgb(var(--on-primary));
+  background-color: rgb(var(--surface));
   border-radius: var(--rounded-full);
   transition: opacity var(--transition-length);
 }

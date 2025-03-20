@@ -8,3 +8,8 @@
   gap: 8px;
   align-items: center;
 }
+
+.right {
+  display: flex;
+  gap: 8px;
+}
