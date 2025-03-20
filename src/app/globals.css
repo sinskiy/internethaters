@@ -34,3 +34,7 @@ body {
   padding: 0 16px;
   max-width: 700px;
 }
+
+main {
+  margin-top: 24px;
+}
