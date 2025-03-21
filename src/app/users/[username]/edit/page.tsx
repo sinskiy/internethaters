@@ -4,6 +4,8 @@ import { auth } from "@/server/auth";
 import { headers } from "next/headers";
 import classes from "./page.module.css";
 import components from "@/app/components.module.css";
+import { Suspense } from "react";
+import Placeholder from "@/app/icons/placeholder";
 
 export default async function Edit({
   params,
@@ -20,7 +22,16 @@ export default async function Edit({
           defaultValue={awaitedParams.username}
           required
         />
-        <ProfilePicture />
+        <Suspense
+          fallback={
+            <figure>
+              <figcaption>profile picture</figcaption>
+              <Placeholder />
+            </figure>
+          }
+        >
+          <ProfilePicture />
+        </Suspense>
       </div>
     </Form>
   );
@@ -32,13 +43,17 @@ async function ProfilePicture() {
   return (
     <figure>
       <figcaption>profile picture</figcaption>
-      <img
-        src={session?.user.image ?? "placeholder.svg"}
-        alt={`${session?.user.name}'s profile picture`}
-        className={`${components.pfp} ${classes.pfp}`}
-        width={128}
-        height={128}
-      />
+      {session?.user.image ? (
+        <img
+          src={session.user.image}
+          alt={`${session?.user.name}'s profile picture`}
+          className={`${components.pfp} ${classes.pfp}`}
+          width={96}
+          height={96}
+        />
+      ) : (
+        <Placeholder />
+      )}
     </figure>
   );
 }
