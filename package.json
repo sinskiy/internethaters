@@ -12,6 +12,7 @@
     "@libsql/client": "^0.15.0",
     "@next/env": "^15.2.2",
     "better-auth": "^1.2.4",
+    "cloudinary": "^2.6.0",
     "drizzle-orm": "^0.40.1",
     "next": "15.2.2",
     "react": "^19.0.0",

@@ -1,0 +1,11 @@
+.pfp-upload {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.pfp {
+  max-width: 96px;
+  max-height: 96px;
+  margin-top: 4px;
+}

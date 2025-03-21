@@ -1,13 +1,7 @@
 .user-info {
   display: flex;
-  flex-direction: column-reverse;
+  flex-direction: column;
   gap: 16px;
   margin-top: 16px;
   margin-bottom: 24px;
-}
-
-.pfp {
-  max-width: 96px;
-  max-height: 96px;
-  margin-top: 4px;
 }

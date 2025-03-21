@@ -60,6 +60,14 @@
   color: inherit;
 }
 
+.file {
+  composes: activatable;
+  width: fit-content;
+  padding: 4px 16px;
+  background-color: rgb(var(--surface-high));
+  border-radius: var(--rounded-small);
+}
+
 .button {
   composes: activatable;
   font-weight: 500;
@@ -81,6 +89,19 @@
 .error {
   background-color: rgb(var(--error));
   color: rgb(var(--on-error));
+}
+
+.file {
+  composes: button;
+  display: block;
+  position: relative;
+  z-index: 10;
+}
+
+.invisible-checkbox {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
 }
 
 .pfp {

@@ -6,6 +6,13 @@ export async function deleteAccountById(id: string) {
   await db.delete(user).where(eq(user.id, id));
 }
 
-export async function updateAccountById(id: string, newUsername: string) {
-  await db.update(user).set({ name: newUsername }).where(eq(user.id, id));
+export async function updateAccountById(
+  id: string,
+  newUsername: string,
+  newPfp: string
+) {
+  await db
+    .update(user)
+    .set({ name: newUsername, image: newPfp })
+    .where(eq(user.id, id));
 }

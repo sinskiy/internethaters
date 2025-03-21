@@ -7,6 +7,7 @@ import Placeholder from "@/app/icons/placeholder";
 import { updateAccountAction } from "@/server/actions";
 import classes from "./page.module.css";
 import components from "@/app/components.module.css";
+import PfpUpload from "@/app/components/pfp-upload";
 
 export default async function Edit({
   params,
@@ -25,7 +26,7 @@ export default async function Edit({
 }
 
 interface ProfilePictureProps {
-  username?: string;
+  username: string;
   loading?: true;
 }
 
@@ -41,26 +42,16 @@ async function EditProfileForm({ username, loading }: ProfilePictureProps) {
       buttonProps={{ disabled: !session?.user.id }}
     >
       <div className={classes["user-info"]}>
+        <h3>profile picture</h3>
+        <div style={{ position: "relative" }}>
+          <PfpUpload username={username} image={session?.user.image} />
+        </div>
         <InputField
           id="username"
           type="text"
           defaultValue={username}
           required
         />
-        <figure>
-          <figcaption>profile picture</figcaption>
-          {session?.user.image ? (
-            <img
-              src={session.user?.image}
-              alt={`${username}'s profile picture`}
-              className={`${components.pfp} ${classes.pfp}`}
-              width={96}
-              height={96}
-            />
-          ) : (
-            <Placeholder />
-          )}
-        </figure>
       </div>
     </Form>
   );
