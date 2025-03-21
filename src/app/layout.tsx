@@ -3,7 +3,7 @@ import { Ubuntu } from "next/font/google";
 import "./reset.css";
 import "./globals.css";
 import { Suspense } from "react";
-import { UserOrAuth } from "./components/user";
+import { UserOrAuth } from "../components/user";
 
 const ubuntu = Ubuntu({
   weight: "400",

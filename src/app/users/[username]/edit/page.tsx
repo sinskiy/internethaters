@@ -1,13 +1,13 @@
 import { auth } from "@/server/auth";
 import { headers } from "next/headers";
-import Form from "@/app/ui/form";
-import InputField from "@/app/ui/input-field";
+import Form from "@/ui/form";
+import InputField from "@/ui/input-field";
 import { Suspense } from "react";
-import Placeholder from "@/app/icons/placeholder";
+import Placeholder from "@/icons/placeholder";
 import { updateAccountAction } from "@/server/actions";
 import classes from "./page.module.css";
 import components from "@/app/components.module.css";
-import PfpUpload from "@/app/components/pfp-upload";
+import PfpUpload from "@/components/pfp-upload";
 
 export default async function Edit({
   params,

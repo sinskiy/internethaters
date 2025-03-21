@@ -1,6 +1,6 @@
 import Link from "next/link";
 import components from "@/app/components.module.css";
-import DeleteAccount from "@/app/components/delete-account";
+import DeleteAccount from "@/components/delete-account";
 
 export default async function Settings({
   params,
