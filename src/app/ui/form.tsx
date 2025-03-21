@@ -1,6 +1,11 @@
 import components from "@/app/components.module.css";
 import classes from "./form.module.css";
-import { FormHTMLAttributes, PropsWithChildren, ReactNode } from "react";
+import {
+  ButtonHTMLAttributes,
+  FormHTMLAttributes,
+  PropsWithChildren,
+  ReactNode,
+} from "react";
 import FormButton from "../components/form-button";
 import { cn } from "@/lib/utils";
 
@@ -10,6 +15,7 @@ interface Props extends FormHTMLAttributes<HTMLFormElement>, PropsWithChildren {
   secondButton?: false | ReactNode;
   formButtonLabel?: string;
   buttonsStyle?: "default" | "dangerous";
+  buttonProps?: Omit<ButtonHTMLAttributes<HTMLButtonElement>, "className">;
 }
 
 export default function Form({
@@ -19,6 +25,7 @@ export default function Form({
   secondButton,
   formButtonLabel,
   buttonsStyle = "default",
+  buttonProps,
   ...props
 }: Props) {
   return (
@@ -33,6 +40,7 @@ export default function Form({
       <div className={classes.nav}>
         <FormButton
           className={cn(buttonsStyle === "dangerous" && components.error)}
+          {...buttonProps}
         >
           {formButtonLabel ?? "submit"}
         </FormButton>
