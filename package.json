@@ -13,6 +13,7 @@
     "@next/env": "^15.2.2",
     "better-auth": "^1.2.4",
     "cloudinary": "^2.6.0",
+    "cloudinary-build-url": "^0.2.4",
     "drizzle-orm": "^0.40.1",
     "next": "15.2.2",
     "react": "^19.0.0",

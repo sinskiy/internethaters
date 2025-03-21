@@ -34,7 +34,11 @@ async function EditProfileForm({ username, loading }: ProfilePictureProps) {
   const session = !loading
     ? await auth.api.getSession({ headers: await headers() })
     : null;
-  const action = updateAccountAction.bind(null, session?.user.id);
+  const action = updateAccountAction.bind(
+    null,
+    session?.user.id,
+    session?.user.image
+  );
 
   return (
     <Form
