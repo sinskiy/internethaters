@@ -35,6 +35,7 @@ async function EditProfileForm({ username, loading }: ProfilePictureProps) {
     ? await auth.api.getSession({ headers: await headers() })
     : null;
   const action = updateAccountAction.bind(null, session?.user.id);
+
   return (
     <Form
       formTitle="edit profile"
@@ -45,6 +46,15 @@ async function EditProfileForm({ username, loading }: ProfilePictureProps) {
         <h3>profile picture</h3>
         <div style={{ position: "relative" }}>
           <PfpUpload username={username} image={session?.user.image} />
+        </div>
+        <div className={components["checkbox-field"]}>
+          <input
+            type="checkbox"
+            name="deletePfp"
+            id="delete-pfp"
+            disabled={!session?.user.image}
+          />
+          <label htmlFor="delete-pfp">delete pfp</label>
         </div>
         <InputField
           id="username"

@@ -11,9 +11,8 @@ interface Props {
 }
 
 export default function PfpUpload({ username, image }: Props) {
-  const [pfpPreview, setPfpPreview] = useState<string>(
-    image ?? "/placeholder.svg"
-  );
+  const [pfpPreview, setPfpPreview] = useState<string>(image ?? "PLACEHOLDER");
+
   function previewPfp(e: ChangeEvent<HTMLInputElement>) {
     const files = e.currentTarget.files;
     if (files) {
@@ -26,7 +25,9 @@ export default function PfpUpload({ username, image }: Props) {
 
   return (
     <div className={classes["pfp-upload"]}>
-      {image ? (
+      {pfpPreview === "PLACEHOLDER" ? (
+        <Placeholder />
+      ) : (
         <img
           src={pfpPreview}
           alt={`${username}'s profile picture`}
@@ -34,8 +35,6 @@ export default function PfpUpload({ username, image }: Props) {
           width={96}
           height={96}
         />
-      ) : (
-        <Placeholder />
       )}
       <input
         type="file"

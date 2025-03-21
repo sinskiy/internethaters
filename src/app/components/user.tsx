@@ -5,6 +5,7 @@ import { OAuthButton, SignOutButton } from "./auth";
 import classes from "./user.module.css";
 import Link from "next/link";
 import Settings from "../icons/settings";
+import Placeholder from "../icons/placeholder";
 
 export async function UserOrAuth() {
   const session = await auth.api.getSession({ headers: await headers() });
@@ -24,13 +25,17 @@ function User({ username, pfpUrl }: UserProfileProps) {
   return (
     <div className={classes.user}>
       <div className={classes.profile}>
-        <img
-          src={pfpUrl ?? "/placeholder.svg"}
-          width={32}
-          height={32}
-          alt={`${username}'s profile picture`}
-          className={components.pfp}
-        />
+        {pfpUrl ? (
+          <img
+            src={pfpUrl}
+            width={32}
+            height={32}
+            alt={`${username}'s profile picture`}
+            className={components.pfp}
+          />
+        ) : (
+          <Placeholder width={32} height={32} />
+        )}
         <p>{username}</p>
       </div>
       <div className={components["small-nav"]}>

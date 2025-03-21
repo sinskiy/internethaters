@@ -20,17 +20,24 @@ export async function updateAccountAction(
 ) {
   const username = formData.get("username");
   const pfp = formData.get("pfp");
-  if (typeof username !== "string" || !id || !(pfp instanceof File)) return;
+  const deletePfp = formData.get("deletePfp");
+  console.log(deletePfp);
+  if (typeof username !== "string" || !id) return;
 
-  const uploadResult = await new Promise(async (resolve) => {
-    fileUploader.uploader
-      .upload_stream({ resource_type: "raw" }, async (err, result) => {
-        if (!err && result && result.url) {
-          await updateAccountById(id, username, result.url);
-          resolve(result);
-        }
-      })
-      .end(await pfp.bytes());
-  });
+  if (deletePfp !== "on" && pfp instanceof File) {
+    await new Promise(async (resolve) => {
+      fileUploader.uploader
+        .upload_stream({ resource_type: "raw" }, async (err, result) => {
+          if (!err && result && result.url) {
+            await updateAccountById(id, username, result.url);
+            resolve(result);
+          }
+        })
+        .end(await pfp.bytes());
+    });
+  } else if (deletePfp === "on") {
+    await updateAccountById(id, username, null);
+  }
+
   redirect(`/users/${username}`);
 }

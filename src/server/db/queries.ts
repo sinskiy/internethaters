@@ -9,7 +9,7 @@ export async function deleteAccountById(id: string) {
 export async function updateAccountById(
   id: string,
   newUsername: string,
-  newPfp: string
+  newPfp: string | null
 ) {
   await db
     .update(user)
