@@ -28,21 +28,21 @@ function User({ username, pfpUrl }: UserProfileProps) {
         {pfpUrl ? (
           <img
             src={pfpUrl}
-            width={32}
-            height={32}
+            width={40}
+            height={40}
             alt={`${username}'s profile picture`}
             className={components.pfp}
           />
         ) : (
-          <Placeholder width={32} height={32} />
+          <Placeholder width={40} height={40} />
         )}
-        <p>{username}</p>
+        <p className={classes.username}>{username}</p>
       </div>
       <div className={components["small-nav"]}>
+        <SignOutButton />
         <Link href={`/users/${username}/settings`} aria-label="settings">
           <Settings />
         </Link>
-        <SignOutButton />
       </div>
     </div>
   );

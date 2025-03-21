@@ -5,6 +5,10 @@
 
 .profile {
   display: flex;
-  gap: 8px;
+  gap: 12px;
   align-items: center;
+}
+
+.username {
+  font-weight: 700;
 }

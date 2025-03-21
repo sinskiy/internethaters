@@ -26,26 +26,28 @@ export default function PfpUpload({ username, image }: Props) {
   return (
     <div className={classes["pfp-upload"]}>
       {pfpPreview === "PLACEHOLDER" ? (
-        <Placeholder />
+        <Placeholder width={128} height={128} />
       ) : (
         <img
           src={pfpPreview}
           alt={`${username}'s profile picture`}
           className={`${components.pfp} ${classes.pfp}`}
-          width={96}
-          height={96}
+          width={128}
+          height={128}
         />
       )}
-      <input
-        type="file"
-        name="pfp"
-        id="pfp"
-        className={components["invisible-checkbox"]}
-        onChange={previewPfp}
-      />
-      <label htmlFor="pfp" className={components.file}>
-        select file
-      </label>
+      <div style={{ position: "relative" }}>
+        <input
+          type="file"
+          name="pfp"
+          id="pfp"
+          className={components["invisible-checkbox"]}
+          onChange={previewPfp}
+        />
+        <label htmlFor="pfp" className={components.file}>
+          select file
+        </label>
+      </div>
     </div>
   );
 }

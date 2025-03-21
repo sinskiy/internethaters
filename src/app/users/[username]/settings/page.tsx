@@ -1,6 +1,7 @@
 import Link from "next/link";
 import components from "@/app/components.module.css";
 import DeleteAccount from "@/components/delete-account";
+import classes from "./page.module.css";
 
 export default async function Settings({
   params,
@@ -10,7 +11,7 @@ export default async function Settings({
   const awaitedParams = await params;
   return (
     <>
-      <nav className={components["small-nav"]}>
+      <nav className={`${components["small-nav"]} ${classes.nav}`}>
         <Link
           href={`/users/${awaitedParams.username}`}
           className={components.link}
@@ -24,7 +25,10 @@ export default async function Settings({
           edit information
         </Link>
       </nav>
-      <DeleteAccount username={awaitedParams.username} />
+      <section>
+        <h2 className={components["section-heading"]}>manage account</h2>
+        <DeleteAccount username={awaitedParams.username} />
+      </section>
     </>
   );
 }
