@@ -1,0 +1,13 @@
+.box {
+  outline: 2px solid rgb(var(--primary));
+  border-radius: var(--rounded-small);
+  padding: 8px 16px;
+}
+
+.svg {
+  display: inline;
+  margin-right: 8px;
+  position: relative;
+  top: 3px;
+  color: rgb(var(--primary));
+}
