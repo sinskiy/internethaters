@@ -14,7 +14,7 @@
   --error: 255 180 171;
   --on-error: 105 0 5;
   --outline: 143 146 133;
-  --rounded-small: 4px;
+  --rounded-small: 8px;
   --rounded-medium: 24px;
   --rounded-full: 9999px;
   --opacity-small: 0.5;
@@ -42,4 +42,22 @@ body {
 
 main {
   margin-top: 32px;
+}
+
+@keyframes scroll-right {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes scroll-left {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(-100%);
+  }
 }
