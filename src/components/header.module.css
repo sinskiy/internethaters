@@ -3,3 +3,8 @@
   gap: 32px;
   align-items: center;
 }
+
+.nav {
+  display: flex;
+  gap: 12px;
+}
