@@ -1,11 +1,16 @@
 "use server";
 
 import { redirect } from "next/navigation";
-import { deleteAccountById, updateAccountById } from "./db/queries";
+import {
+  deleteAccountById,
+  updateAccountById,
+  updateUsernameById,
+} from "./db/queries";
 import { auth } from "./auth";
 import { headers } from "next/headers";
 import { fileUploader } from "./files";
 import { extractPublicId } from "cloudinary-build-url";
+import * as v from "valibot";
 
 export async function deleteAccountAction(username: string) {
   const session = await auth.api.getSession({ headers: await headers() });
@@ -16,36 +21,54 @@ export async function deleteAccountAction(username: string) {
 }
 
 export async function updateAccountAction(
-  id: string | undefined,
-  image: string | null | undefined,
+  { id, image }: { id: string | undefined; image: string | null | undefined },
+  state: unknown,
   formData: FormData
 ) {
-  const username = formData.get("username");
-  const pfp = formData.get("pfp");
-  const deletePfp = formData.get("deletePfp");
-  if (typeof username !== "string" || !id) return;
+  if (!id) return { message: "account id is undefined" };
 
-  if (deletePfp !== "on" && pfp instanceof File) {
+  const result = v.safeParse(UpdateAccountSchema, Object.fromEntries(formData));
+  if (!result.success) {
+    return {
+      errors: v.flatten<typeof UpdateAccountSchema>(result.issues).nested,
+    };
+  }
+  const doDeletePfp = result.output.deletePfp === "on";
+  const { username, pfp } = result.output;
+
+  if (doDeletePfp) {
+    deleteImage(image);
+
+    await updateAccountById(id, username, null);
+  } else if (pfp !== undefined) {
     deleteImage(image);
 
     await new Promise(async (resolve) => {
       fileUploader.uploader
         .upload_stream({ resource_type: "raw" }, async (err, result) => {
           if (!err && result && result.url) {
-            await updateAccountById(id, username, result.url);
+            await updateAccountById(id, result.output.username, result.url);
             resolve(result);
           }
         })
-        .end(await pfp.bytes());
+        .end(
+          await result.output
+            .pfp! /*already checked*/
+            .bytes()
+        );
     });
-  } else if (deletePfp === "on") {
-    deleteImage(image);
-
-    await updateAccountById(id, username, null);
+  } else {
+    await updateUsernameById(id, result.output.username);
   }
 
-  redirect(`/users/${username}`);
+  redirect(`/users/${result.output.username}`);
 }
+
+const UpdateAccountSchema = v.object({
+  username: v.pipe(v.string(), v.nonEmpty(), v.maxLength(255)),
+  pfp: v.optional(v.file()),
+  deletePfp: v.optional(v.string()),
+});
 
 function deleteImage(image?: string | null) {
   const publicId = image && extractPublicId(image);

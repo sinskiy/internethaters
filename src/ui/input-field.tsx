@@ -8,6 +8,7 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
   type: HTMLInputTypeAttribute;
   name?: string;
   label?: string;
+  error: string | undefined;
 }
 
 export default function InputField({
@@ -17,6 +18,7 @@ export default function InputField({
   label = id,
   required,
   className,
+  error,
   ...props
 }: Props) {
   return (
@@ -33,9 +35,12 @@ export default function InputField({
         type={type}
         id={id}
         name={name}
-        className={cn(className, components.input)}
+        className={cn(className, components.input, error && classes.error)}
         {...props}
       />
+      <p aria-live="polite" className={components["input-error"]}>
+        {error}
+      </p>
     </div>
   );
 }

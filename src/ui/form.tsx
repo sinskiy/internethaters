@@ -12,6 +12,7 @@ import { cn } from "@/lib/utils";
 interface Props extends FormHTMLAttributes<HTMLFormElement>, PropsWithChildren {
   formTitle?: string;
   formDescription?: string;
+  formError: string | undefined;
   secondButton?: false | ReactNode;
   formButtonLabel?: string;
   buttonsStyle?: "default" | "dangerous";
@@ -21,6 +22,7 @@ interface Props extends FormHTMLAttributes<HTMLFormElement>, PropsWithChildren {
 export default function Form({
   formTitle,
   formDescription,
+  formError,
   children,
   secondButton,
   formButtonLabel,
@@ -46,6 +48,9 @@ export default function Form({
         </FormButton>
         {secondButton}
       </div>
+      <p aria-live="polite" className={components["input-error"]}>
+        {formError}
+      </p>
     </form>
   );
 }

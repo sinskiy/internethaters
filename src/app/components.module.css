@@ -140,3 +140,9 @@
   gap: 8px;
   align-items: center;
 }
+
+.input-error {
+  margin-top: 4px;
+  color: rgb(var(--error));
+  font-size: 0.875rem;
+}
