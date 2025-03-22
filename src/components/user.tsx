@@ -24,7 +24,10 @@ interface UserProfileProps {
 function User({ username, pfpUrl }: UserProfileProps) {
   return (
     <div className={classes.user}>
-      <div className={classes.profile}>
+      <Link
+        href={`/users/${username}`}
+        className={`${classes.profile} ${classes.username} ${components.link}`}
+      >
         {pfpUrl ? (
           <img
             src={pfpUrl}
@@ -36,8 +39,8 @@ function User({ username, pfpUrl }: UserProfileProps) {
         ) : (
           <Placeholder width={40} height={40} />
         )}
-        <p className={classes.username}>{username}</p>
-      </div>
+        {username}
+      </Link>
       <div className={components["small-nav"]}>
         <SignOutButton small />
         <Link href={`/users/${username}/settings`} aria-label="settings">

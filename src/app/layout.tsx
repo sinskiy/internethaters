@@ -4,6 +4,10 @@ import "./reset.css";
 import "./globals.css";
 import { Suspense } from "react";
 import { UserOrAuth } from "../components/user";
+import Link from "next/link";
+import Home from "./page";
+import components from "@/app/components.module.css";
+import Header from "@/components/header";
 
 const ubuntu = Ubuntu({
   weight: "400",
@@ -28,15 +32,5 @@ export default function RootLayout({
         <main>{children}</main>
       </body>
     </html>
-  );
-}
-
-function Header() {
-  return (
-    <header>
-      <Suspense fallback="loading...">
-        <UserOrAuth />
-      </Suspense>
-    </header>
   );
 }

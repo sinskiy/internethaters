@@ -47,10 +47,10 @@ async function UserProfile({ username, loading }: Props) {
         <p className={classes.username}>
           {user?.name ? `@${user.name}` : "loading"}
         </p>
-        <Suspense>
-          <UserProfileNav username={username} />
-        </Suspense>
       </div>
+      <Suspense>
+        <UserProfileNav username={username} />
+      </Suspense>
     </section>
   );
 }
