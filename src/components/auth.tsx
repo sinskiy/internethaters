@@ -1,7 +1,7 @@
 "use client";
 import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { ButtonHTMLAttributes, useState } from "react";
 import Button from "../ui/button";
 
 export function OAuthButton() {
@@ -21,7 +21,11 @@ export function OAuthButton() {
   );
 }
 
-export function SignOutButton() {
+interface SignOutButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+  small?: true;
+}
+
+export function SignOutButton({ ...props }: SignOutButtonProps) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
 
@@ -35,7 +39,7 @@ export function SignOutButton() {
   }
 
   return (
-    <Button onClick={signOut} small loading={loading}>
+    <Button onClick={signOut} loading={loading} {...props}>
       sign out
     </Button>
   );

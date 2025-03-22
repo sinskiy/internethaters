@@ -87,6 +87,12 @@
   border-radius: var(--rounded-full);
   transition: opacity var(--transition-length);
 }
+.link-button {
+  composes: button;
+  display: flex;
+  justify-content: center;
+  text-decoration: none;
+}
 .loading {
   position: relative;
 }
@@ -96,6 +102,14 @@
 }
 .small {
   padding: 4px 16px;
+}
+.primary-container {
+  background: rgb(var(--primary-container));
+  color: rgb(var(--on-primary-container));
+}
+.tertiary-container {
+  background: rgb(var(--tertiary-container));
+  color: rgb(var(--on-tertiary-container));
 }
 .error {
   background-color: rgb(var(--error));

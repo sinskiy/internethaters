@@ -39,7 +39,7 @@ function User({ username, pfpUrl }: UserProfileProps) {
         <p className={classes.username}>{username}</p>
       </div>
       <div className={components["small-nav"]}>
-        <SignOutButton />
+        <SignOutButton small />
         <Link href={`/users/${username}/settings`} aria-label="settings">
           <Settings />
         </Link>

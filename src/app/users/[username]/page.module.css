@@ -1,0 +1,30 @@
+.user-profile {
+  width: fit-content;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  align-items: center;
+  background-color: rgb(var(--surface-high));
+  border-radius: var(--rounded-medium);
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+}
+
+.user-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 250px;
+}
+
+.username {
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: rgb(var(--primary));
+}

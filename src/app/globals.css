@@ -2,6 +2,10 @@
   /* rgb(var(--example)) */
   --primary: 177 209 138;
   --on-primary: 31 55 1;
+  --primary-container: 53 78 22;
+  --on-primary-container: 205 237 163;
+  --tertiary-container: 31 78 75;
+  --on-tertiary-container: 188 236 231;
   --background: 18 20 14;
   --foreground: 226 227 216;
   --foreground-variant: 197 200 186;
