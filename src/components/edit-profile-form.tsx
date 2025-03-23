@@ -7,6 +7,7 @@ import PfpUpload from "./pfp-upload";
 import InputField from "@/ui/input-field";
 import classes from "./edit-profile-form.module.css";
 import components from "@/app/components.module.css";
+import Checkbox from "@/ui/checkbox";
 
 interface ProfilePictureProps {
   username: string;
@@ -39,18 +40,15 @@ export default function EditProfileForm({
             {state?.errors?.pfp?.[0]}
           </p>
         </div>
-        <div className={components["checkbox-field"]}>
-          <input
-            type="checkbox"
-            name="deletePfp"
-            id="delete-pfp"
-            disabled={!image}
-          />
-          <label htmlFor="delete-pfp">delete pfp</label>
-          <p aria-live="polite" className={components["input-error"]}>
-            {state?.errors?.deletePfp?.[0]}
-          </p>
-        </div>
+        <Checkbox
+          id="delete-pfp"
+          name="deletePfp"
+          label="delete pfp"
+          disabled={!image}
+        />
+        <p aria-live="polite" className={components["input-error"]}>
+          {state?.errors?.deletePfp?.[0]}
+        </p>
         <InputField
           id="username"
           type="text"

@@ -1,0 +1,32 @@
+.checkbox-wrapper {
+  position: relative;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--rounded-full);
+}
+.checkbox-field:hover .checkbox-wrapper {
+  background-color: rgb(var(--primary) / 0.1);
+}
+
+.fake-checkbox {
+  width: 16px;
+  height: 16px;
+  outline: 1px solid rgb(var(--outline));
+  background-color: rgb(var(--background));
+  border-radius: var(--rounded-smallest);
+}
+input[type="checkbox"]:checked + .fake-checkbox {
+  outline-color: rgb(var(--primary));
+  background-color: rgb(var(--primary));
+  color: rgb(var(--on-primary));
+}
+
+.check {
+  display: none;
+}
+input[type="checkbox"]:checked + .fake-checkbox > .check {
+  display: block;
+}
