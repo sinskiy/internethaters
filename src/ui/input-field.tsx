@@ -36,6 +36,7 @@ export default function InputField({
         id={id}
         name={name}
         className={cn(className, components.input, error && classes.error)}
+        placeholder=" "
         {...props}
       />
       <p aria-live="polite" className={components["input-error"]}>

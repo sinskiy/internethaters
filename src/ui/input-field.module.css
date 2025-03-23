@@ -1,3 +1,8 @@
 .required {
   color: rgb(var(--error));
 }
+
+.error,
+.error:focus {
+  outline: 2px solid rgb(var(--error));
+}

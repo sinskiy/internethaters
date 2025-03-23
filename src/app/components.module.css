@@ -47,6 +47,11 @@
   color: var(--foreground-variant);
   margin-bottom: 4px;
   display: block;
+  transition: transform 200ms;
+  transform-origin: 0%;
+}
+.label:has(+ .input:placeholder-shown:not(:focus)) {
+  transform: scale(1.5) translate(10px, 22px);
 }
 .checkbox-label {
   font-weight: 500;
