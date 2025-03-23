@@ -48,10 +48,12 @@
   margin-bottom: 4px;
   display: block;
   transition: transform 200ms;
+  width: fit-content;
+  overflow: hidden;
   transform-origin: 0%;
 }
 .label:has(+ .input:placeholder-shown:not(:focus)) {
-  transform: scale(1.5) translate(10px, 22px);
+  transform: scale(1.25) translate(10px, 26px);
 }
 .checkbox-label {
   font-weight: 500;
