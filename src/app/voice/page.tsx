@@ -1,5 +1,6 @@
 import components from "@/app/components.module.css";
 import classes from "./page.module.css";
+import Link from "next/link";
 
 /* ! temp */
 interface VoiceChat {
@@ -46,11 +47,12 @@ export default function Voice() {
         >
           join random
         </button>
-        <button
-          className={`${components.button} ${components["tertiary-container"]}`}
+        <Link
+          href="/voice/new"
+          className={`${components["tertiary-container"]} ${components["link-button"]}`}
         >
           create new
-        </button>
+        </Link>
       </section>
       <section className={classes["voice-chats"]}>
         {VOICE_CHATS.map((voiceChat) => (

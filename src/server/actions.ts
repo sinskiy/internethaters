@@ -3,6 +3,7 @@
 import { redirect } from "next/navigation";
 import {
   deleteAccountById,
+  insertVoiceChat,
   updateAccountById,
   updateUsernameById,
 } from "./db/queries";
@@ -76,3 +77,27 @@ function deleteImage(image?: string | null) {
     fileUploader.uploader.destroy(publicId, { resource_type: "raw" });
   }
 }
+
+export async function createVoiceChatAction(
+  { userId }: { userId: string | undefined },
+  state: unknown,
+  formData: FormData
+) {
+  if (!userId) return { message: "account id is undefined" };
+
+  const result = v.safeParse(
+    CreateVoiceChatSchema,
+    Object.fromEntries(formData)
+  );
+  if (!result.success) {
+    return {
+      errors: v.flatten<typeof CreateVoiceChatSchema>(result.issues).nested,
+    };
+  }
+  const { title } = result.output;
+  insertVoiceChat(userId, title);
+}
+
+const CreateVoiceChatSchema = v.object({
+  title: v.pipe(v.string(), v.nonEmpty(), v.maxLength(255)),
+});

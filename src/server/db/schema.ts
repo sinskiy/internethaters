@@ -1,4 +1,16 @@
+import { sql } from "drizzle-orm";
 import { sqliteTable, text, integer } from "drizzle-orm/sqlite-core";
+
+export const voiceChat = sqliteTable("voice_chat", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  ownerId: text("owner_id")
+    .notNull()
+    .references(() => user.id, { onDelete: "cascade" }),
+  title: text("title").notNull().unique(),
+  createdAt: integer("created_at", { mode: "timestamp" })
+    .notNull()
+    .default(sql`(current_timestamp)`),
+});
 
 export const user = sqliteTable("user", {
   id: text("id").primaryKey(),

@@ -1,6 +1,6 @@
 import { eq } from "drizzle-orm";
 import db from ".";
-import { user } from "./schema";
+import { user, voiceChat } from "./schema";
 
 export async function getUserByUsername(username: string) {
   const [selectedUser] = await db
@@ -27,4 +27,8 @@ export async function updateAccountById(
     .update(user)
     .set({ name: newUsername, image: newPfp })
     .where(eq(user.id, id));
+}
+
+export async function insertVoiceChat(userId: string, title: string) {
+  await db.insert(voiceChat).values({ ownerId: userId, title });
 }
