@@ -29,6 +29,10 @@ export async function updateAccountById(
     .where(eq(user.id, id));
 }
 
+export async function getAllVoiceChats() {
+  return await db.select().from(voiceChat);
+}
+
 export async function insertVoiceChat(userId: string, title: string) {
   await db.insert(voiceChat).values({ ownerId: userId, title });
 }

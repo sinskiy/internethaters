@@ -16,40 +16,7 @@
   width: 80%;
 }
 
-.row {
-  display: flex;
-  gap: 16px;
-  overflow: hidden;
-}
-
-.animateForward {
-  /* animation: scroll-forward 5s linear infinite; */
-}
-
-.animateBackward {
-  /* animation: scroll-backward 5s linear infinite; */
-}
-
-@keyframes scroll-forward {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(50%);
-  }
-}
-
-@keyframes scroll-backward {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
-
 .voice-chat {
-  flex-grow: 1;
   background-color: rgb(var(--surface));
   padding: 24px;
   border-radius: var(--rounded-medium);
