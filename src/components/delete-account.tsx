@@ -6,6 +6,7 @@ import { RefObject, useRef, useState } from "react";
 import Form from "../ui/form";
 import { DialogCloseButton } from "../ui/dialog-close-button";
 import InputField from "../ui/input-field";
+import Trash from "@/icons/trash";
 
 interface Props {
   username: string;
@@ -23,9 +24,10 @@ export default function DeleteAccount({ username }: Props) {
   return (
     <>
       <button
-        className={`${components.button} ${components.error}`}
+        className={`${components.button} ${components.error} ${components["with-icon"]}`}
         onClick={() => dialogRef.current?.showModal()}
       >
+        <Trash />
         delete account
       </button>
       <dialog ref={dialogRef} className={components.dialog}>

@@ -110,7 +110,9 @@
 }
 .with-icon {
   display: flex;
-  gap: 4px;
+  align-items: center;
+  gap: 8px;
+  padding-left: 24px;
 }
 .small {
   padding: 4px 16px;
