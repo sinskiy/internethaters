@@ -12,7 +12,7 @@ import { headers } from "next/headers";
 import { fileUploader } from "./files";
 import { extractPublicId } from "cloudinary-build-url";
 import * as v from "valibot";
-import { LANGUAGES } from "@/lib/const";
+import { LANGUAGES, LEVELS } from "@/lib/const";
 
 export async function deleteAccountAction(username: string) {
   const session = await auth.api.getSession({ headers: await headers() });
@@ -95,13 +95,17 @@ export async function createVoiceChatAction(
       errors: v.flatten<typeof CreateVoiceChatSchema>(result.issues).nested,
     };
   }
-  const { title, language, maxMembers } = result.output;
-  insertVoiceChat(userId, title, language, maxMembers);
+  const { title, language, level, maxMembers } = result.output;
+  insertVoiceChat(userId, title, language, level, maxMembers);
 }
 
 const CreateVoiceChatSchema = v.object({
   title: v.pipe(v.string(), v.nonEmpty(), v.maxLength(255)),
   language: v.picklist(LANGUAGES),
+  level: v.pipe(
+    v.union([v.picklist(LEVELS), v.literal("")]),
+    v.transform((input) => input || undefined)
+  ),
   maxMembers: v.pipe(
     v.string(),
     v.transform((input) => parseInt(input)),

@@ -1,6 +1,6 @@
 "use client";
 
-import { LANGUAGES } from "@/lib/const";
+import { LANGUAGES, LEVELS } from "@/lib/const";
 import { createVoiceChatAction } from "@/server/actions";
 import Form from "@/ui/form";
 import InputField from "@/ui/input-field";
@@ -41,6 +41,20 @@ export default function CreateVoiceChatForm({ userId }: Props) {
           ))}
         </select>
         <p aria-live="polite">{state?.errors?.language?.[0]}</p>
+      </div>
+      <div>
+        <label htmlFor="level" className={components.label}>
+          level
+        </label>
+        <select name="level" id="level" className={components.select}>
+          <option value=""></option>
+          {LEVELS.map((level) => (
+            <option key={level} value={level}>
+              {level}
+            </option>
+          ))}
+        </select>
+        <p aria-live="polite">{state?.errors?.level?.[0]}</p>
       </div>
       <InputField
         id="max-members"

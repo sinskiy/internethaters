@@ -1,10 +1,11 @@
-import { LANGUAGES } from "@/lib/const";
+import { LANGUAGES, LEVELS } from "@/lib/const";
 import { sql } from "drizzle-orm";
 import { sqliteTable, text, integer, check } from "drizzle-orm/sqlite-core";
 
 export const voiceChat = sqliteTable("voice_chat", {
   id: integer("id").primaryKey({ autoIncrement: true }),
   language: text("language", { enum: LANGUAGES }).notNull(),
+  level: text("level", { enum: LEVELS }),
   ownerId: text("owner_id")
     .notNull()
     .references(() => user.id, { onDelete: "cascade" }),

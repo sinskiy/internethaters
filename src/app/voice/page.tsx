@@ -3,6 +3,7 @@ import classes from "./page.module.css";
 import Link from "next/link";
 import { getAllVoiceChats } from "@/server/db/queries";
 import { Suspense } from "react";
+import { Level } from "@/lib/const";
 
 /* ! temp, remove when I add all fields to db */
 // interface VoiceChat {
@@ -78,7 +79,7 @@ async function VoiceChats() {
 interface VoiceChatProps {
   title: string;
   language: string;
-  // level?: "A1" | "A2" | "B1" | "B2";
+  level: Level;
   // tags: string[];
   members: number;
   maxMembers: number;
@@ -87,10 +88,10 @@ interface VoiceChatProps {
 function VoiceChat({
   title,
   language,
+  level,
   members,
   maxMembers,
-}: // level,
-// tags,
+}: // tags,
 VoiceChatProps) {
   return (
     <article className={classes["voice-chat"]}>
@@ -107,7 +108,7 @@ VoiceChatProps) {
       <ul role="list" className={classes.tags}>
         <li className={classes.tag}>
           {language}
-          {/* <span className={classes.level}>{level && ` (${level})`}</span> */}
+          <span className={classes.level}>{level && ` (${level})`}</span>
         </li>
         {/* {tags.map((tag) => (
           <li key={tag} className={classes.tag}>
