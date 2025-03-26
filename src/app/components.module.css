@@ -166,3 +166,7 @@
   color: rgb(var(--error));
   font-size: 0.875rem;
 }
+
+.required {
+  color: rgb(var(--error));
+}

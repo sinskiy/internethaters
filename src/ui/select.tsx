@@ -1,24 +1,23 @@
-import { HTMLInputTypeAttribute, InputHTMLAttributes } from "react";
 import components from "@/app/components.module.css";
-import classes from "./input-field.module.css";
 import { cn } from "@/lib/utils";
+import { SelectHTMLAttributes } from "react";
 
-interface Props extends InputHTMLAttributes<HTMLInputElement> {
+interface Props extends SelectHTMLAttributes<HTMLSelectElement> {
   id: string;
-  type: HTMLInputTypeAttribute;
+  options: readonly (number | string)[];
   name?: string;
   label?: string;
   error: string | undefined;
 }
 
-export default function InputField({
-  type,
+export default function Select({
   id,
   name = id,
   label = id,
+  options,
+  error,
   required,
   className,
-  error,
   ...props
 }: Props) {
   return (
@@ -31,14 +30,18 @@ export default function InputField({
           </span>
         )}
       </label>
-      <input
-        type={type}
-        id={id}
+      <select
         name={name}
-        className={cn(className, components.input, error && classes.error)}
-        placeholder=" "
+        id={id}
+        className={cn(className, components.select)}
         {...props}
-      />
+      >
+        {options.map((option) => (
+          <option key={option} value={option}>
+            {option}
+          </option>
+        ))}
+      </select>
       <p aria-live="polite" className={components["input-error"]}>
         {error}
       </p>

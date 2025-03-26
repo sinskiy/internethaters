@@ -6,6 +6,7 @@ import Form from "@/ui/form";
 import InputField from "@/ui/input-field";
 import { useActionState } from "react";
 import components from "@/app/components.module.css";
+import Select from "@/ui/select";
 
 interface Props {
   userId: string | undefined;
@@ -29,33 +30,16 @@ export default function CreateVoiceChatForm({ userId }: Props) {
         required
         error={state?.errors?.title?.[0]}
       />
-      <div>
-        <label htmlFor="language" className={components.label}>
-          language
-        </label>
-        <select name="language" id="language" className={components.select}>
-          {LANGUAGES.map((language) => (
-            <option key={language} value={language}>
-              {language}
-            </option>
-          ))}
-        </select>
-        <p aria-live="polite">{state?.errors?.language?.[0]}</p>
-      </div>
-      <div>
-        <label htmlFor="level" className={components.label}>
-          level
-        </label>
-        <select name="level" id="level" className={components.select}>
-          <option value=""></option>
-          {LEVELS.map((level) => (
-            <option key={level} value={level}>
-              {level}
-            </option>
-          ))}
-        </select>
-        <p aria-live="polite">{state?.errors?.level?.[0]}</p>
-      </div>
+      <Select
+        id="language"
+        options={LANGUAGES}
+        error={state?.errors?.language?.[0]}
+      />
+      <Select
+        id="level"
+        options={["", ...LEVELS]}
+        error={state?.errors?.level?.[0]}
+      />
       <InputField
         id="max-members"
         type="number"
