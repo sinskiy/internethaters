@@ -2,11 +2,6 @@ import type { Metadata } from "next";
 import { Ubuntu } from "next/font/google";
 import "./reset.css";
 import "./globals.css";
-import { Suspense } from "react";
-import { UserOrAuth } from "../components/user";
-import Link from "next/link";
-import Home from "./page";
-import components from "@/app/components.module.css";
 import Header from "@/components/header";
 
 const ubuntu = Ubuntu({

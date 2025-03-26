@@ -1,6 +1,5 @@
 "use client";
 import { useRouter } from "next/navigation";
-import components from "@/app/components.module.css";
 import { ButtonHTMLAttributes, PropsWithChildren } from "react";
 
 interface BackProps
