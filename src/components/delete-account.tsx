@@ -2,7 +2,7 @@
 
 import components from "@/app/components.module.css";
 import { deleteAccountAction } from "@/server/actions";
-import { RefObject, useRef, useState } from "react";
+import { RefObject, useActionState, useRef, useState } from "react";
 import Form from "../ui/form";
 import { DialogCloseButton } from "../ui/dialog-close-button";
 import InputField from "../ui/input-field";
@@ -21,6 +21,11 @@ export default function DeleteAccount({ username }: Props) {
 
   const [deletionConfirmation, setDeletionConfirmation] = useState("");
 
+  const [state, formAction] = useActionState(
+    deleteAccountAction.bind(null, username),
+    null
+  );
+
   return (
     <>
       <button
@@ -35,11 +40,11 @@ export default function DeleteAccount({ username }: Props) {
           formTitle="are you sure?"
           formDescription="your account and all related data will be immediately deleted"
           formButtonLabel="delete account"
-          action={() => deleteAccountAction(username)}
+          action={formAction}
           buttonsStyle="dangerous"
           secondButton={<DialogCloseButton dialogRef={dialogRef} />}
           buttonProps={{ disabled: deletionConfirmation !== message }}
-          formError={undefined} // TODO: handle errors
+          formError={state?.error}
         >
           <InputField
             id="deletion-confirmation"

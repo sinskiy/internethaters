@@ -17,7 +17,11 @@ import { LANGUAGES, LEVELS } from "@/lib/const";
 export async function deleteAccountAction(username: string) {
   const session = await auth.api.getSession({ headers: await headers() });
   if (session && session.user.name === username) {
-    await deleteAccountById(session.user.id);
+    try {
+      await deleteAccountById(session.user.id);
+    } catch (err) {
+      return { error: "error deleting " };
+    }
   }
   redirect("/");
 }
@@ -38,29 +42,33 @@ export async function updateAccountAction(
   const doDeletePfp = result.output.deletePfp === "on";
   const { username, pfp } = result.output;
 
-  if (doDeletePfp) {
-    deleteImage(image);
+  try {
+    if (doDeletePfp) {
+      deleteImage(image);
 
-    await updateAccountById(id, username, null);
-  } else if (pfp !== undefined) {
-    deleteImage(image);
+      await updateAccountById(id, username, null);
+    } else if (pfp !== undefined) {
+      deleteImage(image);
 
-    await new Promise(async (resolve) => {
-      fileUploader.uploader
-        .upload_stream({ resource_type: "raw" }, async (err, result) => {
-          if (!err && result && result.url) {
-            await updateAccountById(id, result.output.username, result.url);
-            resolve(result);
-          }
-        })
-        .end(
-          await result.output
-            .pfp! /*already checked*/
-            .bytes()
-        );
-    });
-  } else {
-    await updateUsernameById(id, result.output.username);
+      await new Promise(async (resolve) => {
+        fileUploader.uploader
+          .upload_stream({ resource_type: "raw" }, async (err, result) => {
+            if (!err && result && result.url) {
+              await updateAccountById(id, result.output.username, result.url);
+              resolve(result);
+            }
+          })
+          .end(
+            await result.output
+              .pfp! /*already checked*/
+              .bytes()
+          );
+      });
+    } else {
+      await updateUsernameById(id, result.output.username);
+    }
+  } catch (err) {
+    return { error: "error updating account" };
   }
 
   redirect(`/users/${result.output.username}`);
@@ -96,7 +104,11 @@ export async function createVoiceChatAction(
     };
   }
   const { title, language, level, maxMembers } = result.output;
-  insertVoiceChat(userId, title, language, level, maxMembers);
+  try {
+    await insertVoiceChat(userId, title, language, level, maxMembers);
+  } catch (err) {
+    return { error: "error creating voice chat" };
+  }
 }
 
 const CreateVoiceChatSchema = v.object({
