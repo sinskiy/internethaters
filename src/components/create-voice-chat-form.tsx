@@ -40,7 +40,19 @@ export default function CreateVoiceChatForm({ userId }: Props) {
             </option>
           ))}
         </select>
+        <p aria-live="polite">{state?.errors?.language?.[0]}</p>
       </div>
+      <InputField
+        id="max-members"
+        type="number"
+        name="maxMembers"
+        label="max members"
+        required
+        min={2}
+        max={10}
+        defaultValue={2}
+        error={state?.errors?.maxMembers?.[0]}
+      />
     </Form>
   );
 }

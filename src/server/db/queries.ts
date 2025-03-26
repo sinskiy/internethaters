@@ -37,7 +37,10 @@ export async function getAllVoiceChats() {
 export async function insertVoiceChat(
   userId: string,
   title: string,
-  language: Language
+  language: Language,
+  maxMembers: number
 ) {
-  await db.insert(voiceChat).values({ ownerId: userId, title, language });
+  await db
+    .insert(voiceChat)
+    .values({ ownerId: userId, title, language, maxMembers, members: 0 });
 }

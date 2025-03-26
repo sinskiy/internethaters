@@ -12,6 +12,8 @@ export const voiceChat = sqliteTable("voice_chat", {
   createdAt: integer("created_at", { mode: "timestamp" })
     .notNull()
     .default(sql`(current_timestamp)`),
+  members: integer().notNull(),
+  maxMembers: integer().notNull(),
 });
 
 export const user = sqliteTable("user", {

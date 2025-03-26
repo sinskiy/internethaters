@@ -95,11 +95,17 @@ export async function createVoiceChatAction(
       errors: v.flatten<typeof CreateVoiceChatSchema>(result.issues).nested,
     };
   }
-  const { title, language } = result.output;
-  insertVoiceChat(userId, title, language);
+  const { title, language, maxMembers } = result.output;
+  insertVoiceChat(userId, title, language, maxMembers);
 }
 
 const CreateVoiceChatSchema = v.object({
   title: v.pipe(v.string(), v.nonEmpty(), v.maxLength(255)),
   language: v.picklist(LANGUAGES),
+  maxMembers: v.pipe(
+    v.string(),
+    v.transform((input) => parseInt(input)),
+    v.minValue(2),
+    v.maxValue(10)
+  ),
 });

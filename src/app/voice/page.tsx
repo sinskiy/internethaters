@@ -80,29 +80,29 @@ interface VoiceChatProps {
   language: string;
   // level?: "A1" | "A2" | "B1" | "B2";
   // tags: string[];
-  // members: number;
-  // maxMembers: number;
+  members: number;
+  maxMembers: number;
 }
 
 function VoiceChat({
   title,
   language,
+  members,
+  maxMembers,
 }: // level,
-// maxMembers,
 // tags,
-// members,
 VoiceChatProps) {
   return (
     <article className={classes["voice-chat"]}>
       <div className={classes["voice-chat-header"]}>
         <h2 className={classes["voice-chat-title"]}>{title}</h2>
         {/* TODO: better label */}
-        {/* <div
+        <div
           className={classes["voice-chat-members"]}
           aria-label={`${members} out of ${maxMembers} members`}
         >
           {members}/{maxMembers}
-        </div> */}
+        </div>
       </div>
       <ul role="list" className={classes.tags}>
         <li className={classes.tag}>
