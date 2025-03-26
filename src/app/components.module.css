@@ -130,6 +130,12 @@
   color: rgb(var(--on-error));
 }
 
+.select {
+  background-color: rgb(var(--surface));
+  padding: 8px 16px;
+  border-radius: var(--rounded-small);
+}
+
 .file {
   composes: button;
   display: block;

@@ -1,6 +1,7 @@
 import { eq } from "drizzle-orm";
 import db from ".";
 import { user, voiceChat } from "./schema";
+import { Language } from "@/lib/const";
 
 export async function getUserByUsername(username: string) {
   const [selectedUser] = await db
@@ -33,6 +34,10 @@ export async function getAllVoiceChats() {
   return await db.select().from(voiceChat);
 }
 
-export async function insertVoiceChat(userId: string, title: string) {
-  await db.insert(voiceChat).values({ ownerId: userId, title });
+export async function insertVoiceChat(
+  userId: string,
+  title: string,
+  language: Language
+) {
+  await db.insert(voiceChat).values({ ownerId: userId, title, language });
 }

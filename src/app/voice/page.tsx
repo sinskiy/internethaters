@@ -51,7 +51,7 @@ export default function Voice() {
         </button>
         <Link
           href="/voice/new"
-          className={`${components["tertiary-container"]} ${components["link-button"]}`}
+          className={`${components.button} ${components["tertiary-container"]} ${components["link-button"]}`}
         >
           create new
         </Link>
@@ -77,7 +77,7 @@ async function VoiceChats() {
 
 interface VoiceChatProps {
   title: string;
-  // language: string;
+  language: string;
   // level?: "A1" | "A2" | "B1" | "B2";
   // tags: string[];
   // members: number;
@@ -86,8 +86,8 @@ interface VoiceChatProps {
 
 function VoiceChat({
   title,
-}: // language,
-// level,
+  language,
+}: // level,
 // maxMembers,
 // tags,
 // members,
@@ -104,17 +104,17 @@ VoiceChatProps) {
           {members}/{maxMembers}
         </div> */}
       </div>
-      {/* <ul role="list" className={classes.tags}>
+      <ul role="list" className={classes.tags}>
         <li className={classes.tag}>
           {language}
-          <span className={classes.level}>{level && ` (${level})`}</span>
+          {/* <span className={classes.level}>{level && ` (${level})`}</span> */}
         </li>
-        {tags.map((tag) => (
+        {/* {tags.map((tag) => (
           <li key={tag} className={classes.tag}>
             {tag}
           </li>
-        ))}
-      </ul> */}
+        ))} */}
+      </ul>
     </article>
   );
 }
