@@ -44,7 +44,7 @@ export default function DeleteAccount({ username }: Props) {
           buttonsStyle="dangerous"
           secondButton={<DialogCloseButton dialogRef={dialogRef} />}
           buttonProps={{ disabled: deletionConfirmation !== message }}
-          formError={state?.error}
+          formError={state?.message}
         >
           <InputField
             id="deletion-confirmation"

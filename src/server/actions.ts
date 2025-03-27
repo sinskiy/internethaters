@@ -21,7 +21,7 @@ export async function deleteAccountAction(username: string) {
   if (session && session.user.name === username) {
     try {
       await deleteAccountById(session.user.id);
-    } catch (err) {
+    } catch {
       return { message: "error deleting account" };
     }
   }
@@ -69,7 +69,7 @@ export async function updateAccountAction(
     } else {
       await updateUsernameById(id, result.output.username);
     }
-  } catch (err) {
+  } catch {
     return { message: "error updating account" };
   }
 
@@ -116,7 +116,7 @@ export async function createVoiceChatAction(
       maxMembers
     );
     id = voiceChat.id;
-  } catch (err) {
+  } catch {
     return { message: "server error creating voice chat" };
   }
 
@@ -147,7 +147,7 @@ export async function joinVoiceChatAction({
 }) {
   try {
     await updateUserCurrentVoiceChat(userId, id);
-  } catch (err) {
+  } catch {
     return { message: "server error joining voice chat" };
   }
   // TODO: normal revalidation
@@ -159,7 +159,7 @@ export async function joinRandomVoiceChatAction(userId: string) {
   try {
     const randomVoiceChat = await getRandomVoiceChatId();
     await joinVoiceChatAction({ id: randomVoiceChat.id, userId });
-  } catch (err) {
+  } catch {
     return { message: "server error joining random voice chat" };
   }
 }
