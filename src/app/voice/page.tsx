@@ -7,6 +7,11 @@ import {
 } from "@/server/db/queries";
 import { Suspense } from "react";
 import { Level } from "@/lib/const";
+import Form from "@/ui/form";
+import { auth } from "@/server/auth";
+import { headers } from "next/headers";
+import { joinVoiceChatAction } from "@/server/actions";
+import JoinForm from "@/components/join-form";
 
 /* ! temp, remove when I add all fields to db */
 // interface VoiceChat {
@@ -113,6 +118,9 @@ VoiceChatProps) {
           </li>
         ))} */}
       </ul>
+      <Suspense>
+        <Join id={id} />
+      </Suspense>
     </article>
   );
 }
@@ -132,4 +140,14 @@ async function Members({ id, maxMembers }: MembersProps) {
       {members.count}/{maxMembers}
     </div>
   );
+}
+
+interface JoinProps {
+  id: number;
+}
+
+async function Join({ id }: JoinProps) {
+  const session = await auth.api.getSession({ headers: await headers() });
+  if (!session) return;
+  return <JoinForm id={id} userId={session.user.id} />;
 }

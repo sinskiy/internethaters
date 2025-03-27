@@ -15,7 +15,7 @@ interface Props extends FormHTMLAttributes<HTMLFormElement>, PropsWithChildren {
   formError: string | undefined;
   secondButton?: false | ReactNode;
   formButtonLabel?: string;
-  buttonsStyle?: "default" | "dangerous";
+  buttonsStyle?: "default" | "primary-container" | "dangerous";
   buttonProps?: Omit<ButtonHTMLAttributes<HTMLButtonElement>, "className">;
 }
 
@@ -32,7 +32,7 @@ export default function Form({
 }: Props) {
   return (
     <form {...props}>
-      <div className={cn(!children && classes["orphan-header"])}>
+      <div className={cn(!children && formTitle && classes["orphan-header"])}>
         {formTitle && <h2 className={components["form-title"]}>{formTitle}</h2>}
         {formDescription && (
           <p className={components.text}>{formDescription}</p>
@@ -41,7 +41,11 @@ export default function Form({
       <div className={classes.body}>{children}</div>
       <div className={classes.nav}>
         <FormButton
-          className={cn(buttonsStyle === "dangerous" && components.error)}
+          className={cn(
+            buttonsStyle === "primary-container" &&
+              components["primary-container"],
+            buttonsStyle === "dangerous" && components.error
+          )}
           {...buttonProps}
         >
           {formButtonLabel ?? "submit"}

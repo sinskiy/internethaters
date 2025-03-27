@@ -57,3 +57,13 @@ export async function insertVoiceChat(
     maxMembers,
   });
 }
+
+export async function updateUserCurrentVoiceChat(
+  userId: string,
+  voiceChatId: number
+) {
+  await db
+    .update(user)
+    .set({ currentVoiceChatId: voiceChatId })
+    .where(eq(user.id, userId));
+}

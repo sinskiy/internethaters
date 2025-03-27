@@ -5,6 +5,7 @@ import {
   deleteAccountById,
   insertVoiceChat,
   updateAccountById,
+  updateUserCurrentVoiceChat,
   updateUsernameById,
 } from "./db/queries";
 import { auth } from "./auth";
@@ -20,7 +21,7 @@ export async function deleteAccountAction(username: string) {
     try {
       await deleteAccountById(session.user.id);
     } catch (err) {
-      return { error: "error deleting " };
+      return { message: "error deleting account" };
     }
   }
   redirect("/");
@@ -68,7 +69,7 @@ export async function updateAccountAction(
       await updateUsernameById(id, result.output.username);
     }
   } catch (err) {
-    return { error: "error updating account" };
+    return { message: "error updating account" };
   }
 
   redirect(`/users/${result.output.username}`);
@@ -107,7 +108,7 @@ export async function createVoiceChatAction(
   try {
     await insertVoiceChat(userId, title, language, level, maxMembers);
   } catch (err) {
-    return { error: "error creating voice chat" };
+    return { message: "server error creating voice chat" };
   }
 }
 
@@ -125,3 +126,17 @@ const CreateVoiceChatSchema = v.object({
     v.maxValue(10)
   ),
 });
+
+export async function joinVoiceChatAction({
+  id,
+  userId,
+}: {
+  id: number;
+  userId: string;
+}) {
+  try {
+    await updateUserCurrentVoiceChat(userId, id);
+  } catch (err) {
+    return { message: "server error joining voice chat" };
+  }
+}
