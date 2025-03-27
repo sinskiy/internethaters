@@ -1,4 +1,4 @@
-import { count, eq } from "drizzle-orm";
+import { count, eq, sql } from "drizzle-orm";
 import db from ".";
 import { user, voiceChat } from "./schema";
 import { Language, Level } from "@/lib/const";
@@ -66,4 +66,13 @@ export async function updateUserCurrentVoiceChat(
     .update(user)
     .set({ currentVoiceChatId: voiceChatId })
     .where(eq(user.id, userId));
+}
+
+export async function getRandomVoiceChatId() {
+  const [randomVoiceChat] = await db
+    .select({ id: voiceChat.id })
+    .from(voiceChat)
+    .orderBy(sql`RANDOM()`)
+    .limit(1);
+  return randomVoiceChat;
 }

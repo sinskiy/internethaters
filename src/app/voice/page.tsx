@@ -7,11 +7,9 @@ import {
 } from "@/server/db/queries";
 import { Suspense } from "react";
 import { Level } from "@/lib/const";
-import Form from "@/ui/form";
 import { auth } from "@/server/auth";
 import { headers } from "next/headers";
-import { joinVoiceChatAction } from "@/server/actions";
-import JoinForm from "@/components/join-form";
+import { JoinForm, JoinRandomForm } from "@/components/join-form";
 
 /* ! temp, remove when I add all fields to db */
 // interface VoiceChat {
@@ -52,11 +50,9 @@ export default function Voice() {
   return (
     <>
       <section className={classes.buttons}>
-        <button
-          className={`${components.button} ${components["primary-container"]}`}
-        >
-          join random
-        </button>
+        <Suspense fallback="loading...">
+          <JoinRandom />
+        </Suspense>
         <Link
           href="/voice/new"
           className={`${components.button} ${components["tertiary-container"]} ${components["link-button"]}`}
@@ -140,6 +136,12 @@ async function Members({ id, maxMembers }: MembersProps) {
       {members.count}/{maxMembers}
     </div>
   );
+}
+
+async function JoinRandom() {
+  const session = await auth.api.getSession({ headers: await headers() });
+  if (!session) return;
+  return <JoinRandomForm userId={session.user.id} />;
 }
 
 interface JoinProps {

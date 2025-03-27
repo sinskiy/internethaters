@@ -3,13 +3,14 @@
 import { redirect } from "next/navigation";
 import {
   deleteAccountById,
+  getRandomVoiceChatId,
   insertVoiceChat,
   updateAccountById,
   updateUserCurrentVoiceChat,
   updateUsernameById,
 } from "./db/queries";
 import { auth } from "./auth";
-import { headers } from "next/headers";
+import { cookies, headers } from "next/headers";
 import { fileUploader } from "./files";
 import { extractPublicId } from "cloudinary-build-url";
 import * as v from "valibot";
@@ -110,6 +111,8 @@ export async function createVoiceChatAction(
   } catch (err) {
     return { message: "server error creating voice chat" };
   }
+
+  redirect("/voice");
 }
 
 const CreateVoiceChatSchema = v.object({
@@ -138,5 +141,16 @@ export async function joinVoiceChatAction({
     await updateUserCurrentVoiceChat(userId, id);
   } catch (err) {
     return { message: "server error joining voice chat" };
+  }
+  // TODO: normal revalidation
+  (await cookies()).set("force-refresh", String(Math.random()));
+}
+
+export async function joinRandomVoiceChatAction(userId: string) {
+  try {
+    const randomVoiceChat = await getRandomVoiceChatId();
+    await joinVoiceChatAction({ id: randomVoiceChat.id, userId });
+  } catch (err) {
+    return { message: "server error joining random voice chat" };
   }
 }

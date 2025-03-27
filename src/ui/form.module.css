@@ -13,5 +13,8 @@
   display: flex;
   gap: 4px;
   flex-wrap: wrap;
+}
+
+.not-orphan-nav {
   margin-top: 16px;
 }

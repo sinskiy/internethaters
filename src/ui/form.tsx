@@ -38,8 +38,13 @@ export default function Form({
           <p className={components.text}>{formDescription}</p>
         )}
       </div>
-      <div className={classes.body}>{children}</div>
-      <div className={classes.nav}>
+      {children && <div className={classes.body}>{children}</div>}
+      <div
+        className={cn(
+          classes.nav,
+          (children || formTitle) && classes["not-orphan-nav"]
+        )}
+      >
         <FormButton
           className={cn(
             buttonsStyle === "primary-container" &&
