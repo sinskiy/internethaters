@@ -1,6 +1,17 @@
 import { LANGUAGES, LEVELS } from "@/lib/const";
-import { sql } from "drizzle-orm";
-import { sqliteTable, text, integer, check } from "drizzle-orm/sqlite-core";
+import { relations, sql } from "drizzle-orm";
+import { sqliteTable, text, integer } from "drizzle-orm/sqlite-core";
+
+export const user = sqliteTable("user", {
+  id: text("id").primaryKey(),
+  name: text("name").notNull(),
+  email: text("email").notNull().unique(),
+  emailVerified: integer("email_verified", { mode: "boolean" }).notNull(),
+  image: text("image"),
+  currentVoiceChatId: integer("current_voice_chat_id"),
+  createdAt: integer("created_at", { mode: "timestamp" }).notNull(),
+  updatedAt: integer("updated_at", { mode: "timestamp" }).notNull(),
+});
 
 export const voiceChat = sqliteTable("voice_chat", {
   id: integer("id").primaryKey({ autoIncrement: true }),
@@ -17,15 +28,13 @@ export const voiceChat = sqliteTable("voice_chat", {
   maxMembers: integer().notNull(),
 });
 
-export const user = sqliteTable("user", {
-  id: text("id").primaryKey(),
-  name: text("name").notNull(),
-  email: text("email").notNull().unique(),
-  emailVerified: integer("email_verified", { mode: "boolean" }).notNull(),
-  image: text("image"),
-  createdAt: integer("created_at", { mode: "timestamp" }).notNull(),
-  updatedAt: integer("updated_at", { mode: "timestamp" }).notNull(),
-});
+// foreign key creates circular dependency
+export const userRelations = relations(user, ({ one }) => ({
+  currentVoiceChat: one(voiceChat, {
+    fields: [user.currentVoiceChatId],
+    references: [voiceChat.id],
+  }),
+}));
 
 export const session = sqliteTable("session", {
   id: text("id").primaryKey(),
