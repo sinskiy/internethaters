@@ -49,13 +49,17 @@ export async function insertVoiceChat(
   level: Level,
   maxMembers: number
 ) {
-  await db.insert(voiceChat).values({
-    ownerId: userId,
-    title,
-    language,
-    level,
-    maxMembers,
-  });
+  const [newVoiceChat] = await db
+    .insert(voiceChat)
+    .values({
+      ownerId: userId,
+      title,
+      language,
+      level,
+      maxMembers,
+    })
+    .returning({ id: voiceChat.id });
+  return newVoiceChat;
 }
 
 export async function updateUserCurrentVoiceChat(

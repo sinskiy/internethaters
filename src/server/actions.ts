@@ -106,13 +106,21 @@ export async function createVoiceChatAction(
     };
   }
   const { title, language, level, maxMembers } = result.output;
+  let id: number;
   try {
-    await insertVoiceChat(userId, title, language, level, maxMembers);
+    const voiceChat = await insertVoiceChat(
+      userId,
+      title,
+      language,
+      level,
+      maxMembers
+    );
+    id = voiceChat.id;
   } catch (err) {
     return { message: "server error creating voice chat" };
   }
 
-  redirect("/voice");
+  redirect(`/voice/${id}`);
 }
 
 const CreateVoiceChatSchema = v.object({
@@ -144,6 +152,7 @@ export async function joinVoiceChatAction({
   }
   // TODO: normal revalidation
   (await cookies()).set("force-refresh", String(Math.random()));
+  redirect(`/voice/${id}`);
 }
 
 export async function joinRandomVoiceChatAction(userId: string) {
