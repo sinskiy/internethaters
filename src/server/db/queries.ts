@@ -1,4 +1,4 @@
-import { eq } from "drizzle-orm";
+import { count, eq } from "drizzle-orm";
 import db from ".";
 import { user, voiceChat } from "./schema";
 import { Language, Level } from "@/lib/const";
@@ -34,6 +34,14 @@ export async function getAllVoiceChats() {
   return await db.select().from(voiceChat);
 }
 
+export async function getMembersCountByVoiceChatId(id: number) {
+  const [membersCount] = await db
+    .select({ count: count(user.id) })
+    .from(user)
+    .where(eq(user.currentVoiceChatId, id));
+  return membersCount;
+}
+
 export async function insertVoiceChat(
   userId: string,
   title: string,
@@ -47,6 +55,5 @@ export async function insertVoiceChat(
     language,
     level,
     maxMembers,
-    members: 0,
   });
 }

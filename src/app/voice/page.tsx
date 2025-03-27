@@ -1,7 +1,10 @@
 import components from "@/app/components.module.css";
 import classes from "./page.module.css";
 import Link from "next/link";
-import { getAllVoiceChats } from "@/server/db/queries";
+import {
+  getAllVoiceChats,
+  getMembersCountByVoiceChatId,
+} from "@/server/db/queries";
 import { Suspense } from "react";
 import { Level } from "@/lib/const";
 
@@ -11,7 +14,6 @@ import { Level } from "@/lib/const";
 //   language: string;
 //   level?: "A1" | "A2" | "B1" | "B2";
 //   tags: string[];
-//   members: number;
 //   maxMembers: number;
 // }
 
@@ -77,19 +79,19 @@ async function VoiceChats() {
 }
 
 interface VoiceChatProps {
+  id: number;
   title: string;
   language: string;
   level: Level;
   // tags: string[];
-  members: number;
   maxMembers: number;
 }
 
 function VoiceChat({
+  id,
   title,
   language,
   level,
-  members,
   maxMembers,
 }: // tags,
 VoiceChatProps) {
@@ -98,12 +100,7 @@ VoiceChatProps) {
       <div className={classes["voice-chat-header"]}>
         <h2 className={classes["voice-chat-title"]}>{title}</h2>
         {/* TODO: better label */}
-        <div
-          className={classes["voice-chat-members"]}
-          aria-label={`${members} out of ${maxMembers} members`}
-        >
-          {members}/{maxMembers}
-        </div>
+        <Members id={id} maxMembers={maxMembers} />
       </div>
       <ul role="list" className={classes.tags}>
         <li className={classes.tag}>
@@ -117,5 +114,22 @@ VoiceChatProps) {
         ))} */}
       </ul>
     </article>
+  );
+}
+
+interface MembersProps {
+  id: number;
+  maxMembers: number;
+}
+
+async function Members({ id, maxMembers }: MembersProps) {
+  const members = await getMembersCountByVoiceChatId(id);
+  return (
+    <div
+      className={classes["voice-chat-members"]}
+      aria-label={`${members.count} out of ${maxMembers} members`}
+    >
+      {members.count}/{maxMembers}
+    </div>
   );
 }
